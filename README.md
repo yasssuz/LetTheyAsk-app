@@ -1,3 +1,3 @@
-# LetMeAsk
+# LetTheyAsk
 
-## Project in Stand By
+## Project under development

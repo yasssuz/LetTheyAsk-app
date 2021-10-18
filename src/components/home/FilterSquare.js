@@ -1,10 +1,119 @@
-import { Box, Heading, List } from "@chakra-ui/layout";
+import { Button } from "@chakra-ui/button";
+import { Box, Heading, List, ListItem } from "@chakra-ui/layout";
 
 export default function FilterSquare() {
   return (
-    <Box as='section'>
-      <List>
-        <Heading>still developing</Heading>
+    <Box
+      as='section'
+      bg='white'
+      borderRadius='10px'
+      px='22px'
+      pt='2.4rem'
+      pb='3.6rem'
+      position='relative'
+      overflow='hidden'
+    >
+      <List
+        display='flex'
+        gridGap='13px 8px'
+        flexWrap='wrap'
+        justifyContent='flex-start'
+      >
+        <ListItem
+          position='absolute'
+          height='100%'
+          bg='blue'
+          width='100%'
+          left='0'
+          top='0'
+          borderRadius='10px'
+          zIndex='2'
+          sx={{ filter: "blur(3rem)" }}
+        ></ListItem>
+        <ListItem
+          position='absolute'
+          top='50%'
+          left='50%'
+          transform='translate(-50%, -50%)'
+          textAlign='center'
+          color='white'
+          width='27ch'
+          zIndex='3'
+        >
+          <Heading>Coming Soon!</Heading>
+        </ListItem>
+        <ListItem>
+          <Button
+            px='1.6rem'
+            h='3rem'
+            bg='blue'
+            color='white'
+            borderRadius='10px'
+            fontSize='1.35rem'
+          >
+            All
+          </Button>
+        </ListItem>
+        <ListItem>
+          <Button
+            px='1.6rem'
+            h='3rem'
+            bg='gray'
+            color='blue'
+            borderRadius='10px'
+            fontSize='1.35rem'
+          >
+            UI
+          </Button>
+        </ListItem>
+        <ListItem>
+          <Button
+            px='1.6rem'
+            h='3rem'
+            bg='gray'
+            color='blue'
+            borderRadius='10px'
+            fontSize='1.35rem'
+          >
+            UX
+          </Button>
+        </ListItem>
+        <ListItem>
+          <Button
+            px='1.6rem'
+            h='3rem'
+            bg='gray'
+            color='blue'
+            borderRadius='10px'
+            fontSize='1.35rem'
+          >
+            Enhancement
+          </Button>
+        </ListItem>
+        <ListItem>
+          <Button
+            px='1.6rem'
+            h='3rem'
+            bg='gray'
+            color='blue'
+            borderRadius='10px'
+            fontSize='1.35rem'
+          >
+            Bug
+          </Button>
+        </ListItem>
+        <ListItem>
+          <Button
+            px='1.6rem'
+            h='3rem'
+            bg='gray'
+            color='blue'
+            borderRadius='10px'
+            fontSize='1.35rem'
+          >
+            Feature
+          </Button>
+        </ListItem>
       </List>
     </Box>
   );

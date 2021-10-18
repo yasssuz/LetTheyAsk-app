@@ -1,7 +1,10 @@
+import { Box } from "@chakra-ui/react";
+import SideArea from "../components/home/SideArea";
+
 export default function Home() {
   return (
-    <div>
-      <h1>h</h1>
-    </div>
+    <Box>
+      <SideArea />
+    </Box>
   );
 }

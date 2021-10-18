@@ -1,0 +1,10 @@
+html {
+  font-size: 62.5% !important;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: "Jost", sans-serif !important;
+  position: relative;
+}

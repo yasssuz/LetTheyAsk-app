@@ -14,7 +14,7 @@ const theme = extendTheme({
     cyan: "#62BCFA",
     purple: "#AD1FEA",
     orange: "#F49F85",
-    darkGray: "#647196",
+    gray: "#647196",
     gray: "#F2F4FF",
     lightGray: "#F7F8FD",
     white: "#FFFFFF",

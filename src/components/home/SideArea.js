@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import BoardSquare from "./BoardSquare";
 import FilterSquare from "./FilterSquare";
+import RoadmapSquare from "./RoadmapSquare";
 
 export default function SideArea() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,7 +29,7 @@ export default function SideArea() {
         }}
       >
         <FilterSquare />
-        <Box></Box>
+        <RoadmapSquare />
       </Box>
     </Flex>
   );

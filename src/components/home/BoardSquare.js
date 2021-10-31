@@ -7,6 +7,7 @@ export default function BoardSquare({ openMenu, menuOpen }) {
       as='section'
       h='7.2rem'
       w='100%'
+      zIndex='1500'
       bg='radial-gradient(128.88% 128.88% at 103.9% -10.39%, #E84D70 0%, #A337F6 53.09%, #28A7ED 100%);'
       color='white'
       px='2.4rem'

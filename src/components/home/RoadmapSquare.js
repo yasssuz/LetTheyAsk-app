@@ -5,7 +5,7 @@ export default function RoadmapSquare() {
   return (
     <Box
       as='section'
-      mt='1.9rem'
+      mt={["1.9rem", "0"]}
       bg='white'
       borderRadius='1rem'
       p='2.4rem 2.2rem'
@@ -21,6 +21,7 @@ export default function RoadmapSquare() {
             fontWeight='600'
             fontSize='1.4rem'
             lineHeight='1.4rem'
+            cursor='pointer'
           >
             View
           </Text>

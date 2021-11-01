@@ -1,5 +1,5 @@
+import { createBreakpoints } from "@chakra-ui/theme-tools";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import "../globals.css";
 
 const theme = extendTheme({
   textStyles: {
@@ -7,6 +7,24 @@ const theme = extendTheme({
       fontFamily: "serif",
     },
   },
+  styles: {
+    global: {
+      html: {
+        fontSize: "62.5% !important",
+        overflowX: "hidden",
+      },
+      body: {
+        overflowX: "hidden",
+        fontFamily: "'Jost', sans-serif !important",
+        position: "relative",
+      },
+    },
+  },
+  breakpoints: createBreakpoints({
+    sm: "640px",
+    md: "47.5em",
+    lg: "64em",
+  }),
   colors: {
     darkGray: "#373F68",
     darkBlue: "#3A4374",

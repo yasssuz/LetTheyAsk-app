@@ -12,9 +12,8 @@ export default function SideArea() {
 
   return (
     <Grid
-      p={[null, "5.6rem 3.9rem", "0"]}
       as='aside'
-      h={[null, "17.8rem", "fit-content"]}
+      h={[null, "18.1rem", "fit-content"]}
       gap={[null, "1rem", "2.4rem"]}
       templateColumns={[null, "1fr 2fr", "100%"]}
       w={[null, null, "100%"]}
@@ -32,7 +31,7 @@ export default function SideArea() {
         gridGap={[null, "1rem", "2.4rem"]}
         right='-100%'
         w={["72%", "auto"]}
-        minW={["271px", "0"]}
+        minW={["271px", "unset"]}
         bg={["gray", "transparent"]}
         p={["2.4rem", "0"]}
         zIndex='1500'

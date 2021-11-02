@@ -27,7 +27,7 @@ export default function RoadmapSquare() {
           </Text>
         </Link>
       </Flex>
-      <List mt='2.2rem'>
+      <List mt='2.2rem' color='semiGray'>
         <ListItem display='flex' alignItems='center'>
           <Box w='8px' h='8px' borderRadius='50%' bg='orange' mr='1rem' />
           <Text as='span' fontSize='1.6rem' lineHeight='2.3rem'>

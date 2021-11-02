@@ -1,4 +1,5 @@
 import { Box, Grid } from "@chakra-ui/react";
+import FeedbacksArea from "../components/home/FeedbacksArea";
 import Header from "../components/home/Header";
 import SideArea from "../components/home/SideArea";
 
@@ -17,6 +18,7 @@ export default function Home() {
         <SideArea />
         <Box>
           <Header />
+          <FeedbacksArea />
         </Box>
       </Grid>
     </div>

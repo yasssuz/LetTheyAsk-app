@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import { Box, Flex, Grid } from "@chakra-ui/layout";
+import { Box, Grid } from "@chakra-ui/layout";
 
 import BoardSquare from "./BoardSquare";
 import FilterSquare from "./FilterSquare";
 import RoadmapSquare from "./RoadmapSquare";
-import Overlay from "../shared/overlay";
+import Overlay from "../shared/Overlay";
 
 export default function SideArea() {
   const [menuOpen, setMenuOpen] = useState(false);

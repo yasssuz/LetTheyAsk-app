@@ -1,4 +1,5 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Grid } from "@chakra-ui/layout";
+
 import FeedbacksArea from "../components/home/FeedbacksArea";
 import Header from "../components/home/Header";
 import SideArea from "../components/home/SideArea";

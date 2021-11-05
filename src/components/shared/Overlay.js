@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/layout";
 
 export default function Overlay({ show }) {
-  console.log(show);
   return (
     <Box
       position='fixed'

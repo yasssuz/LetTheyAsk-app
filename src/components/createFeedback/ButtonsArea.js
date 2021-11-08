@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
+import useAuth from "../../hooks/useAuth";
 import Link from "next/link";
 
-import { Button } from "@chakra-ui/button";
 import { Flex, Heading, Text } from "@chakra-ui/layout";
 import {
   AlertDialog,
@@ -11,8 +11,10 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
 } from "@chakra-ui/modal";
+import { CustomButton } from "../shared/Buttons";
 
 export default function ButtonsArea({}) {
+  const { user, handleSignIn } = useAuth();
   const [cancelModal, setCancelModal] = useState(false);
   const cancelBtnRef = useRef();
 
@@ -22,43 +24,37 @@ export default function ButtonsArea({}) {
       justifyContent={[null, "flex-end"]}
       mt='4rem'
     >
-      <Button
-        type='submit'
-        bg='purple'
-        py={["0.81em", "0.9em"]}
-        mr={[null, "1.6rem"]}
-        fontSize='1.4rem'
-        lineHeight='1.9rem'
-        fontWeight='bold'
-        borderRadius='1rem'
-        color='white'
-        w={["100%", "14.4rem"]}
-        h='unset'
-        textAlign='center'
-        transition='filter 0.2s ease'
-        _hover={{ textDecoration: "none", filter: "brightness(1.15)" }}
-      >
-        Add Feedback
-      </Button>
-      <Button
-        type='button'
-        bg='darkGray'
-        py={["0.81em", "0.9em"]}
-        fontSize='1.4rem'
-        lineHeight='1.9rem'
-        fontWeight='bold'
-        borderRadius='1rem'
-        color='white'
-        w={["100%", "9.3rem"]}
-        h='unset'
-        textAlign='center'
-        transition='filter 0.2s ease'
-        _hover={{ textDecoration: "none", filter: "brightness(1.15)" }}
-        mt={["1.6rem", "0"]}
-        onClick={() => setCancelModal(true)}
-      >
-        Cancel
-      </Button>
+      {!user ? (
+        <CustomButton
+          type='button'
+          onClick={handleSignIn}
+          bg='red'
+          w={["100%", "10rem"]}
+        >
+          Log In
+        </CustomButton>
+      ) : (
+        <>
+          <CustomButton
+            type='submit'
+            w={["100%", "14.4rem"]}
+            bg='purple'
+            mr={[null, "1.6rem"]}
+            mt=''
+          >
+            Add Feedback
+          </CustomButton>
+          <CustomButton
+            type='button'
+            onClick={() => setCancelModal(true)}
+            bg='darkGray'
+            w={["100%", "9.3rem"]}
+            mt={["1.6rem", "0"]}
+          >
+            Cancel
+          </CustomButton>
+        </>
+      )}
       <AlertDialog
         isOpen={cancelModal}
         leastDestructiveRef={cancelBtnRef}
@@ -85,31 +81,27 @@ export default function ButtonsArea({}) {
               </Text>
             </AlertDialogBody>
             <AlertDialogFooter>
-              <Button
+              <CustomButton
                 ref={cancelBtnRef}
                 onClick={() => setCancelModal(false)}
-                fontSize='1.6rem'
-                py='1.2em'
+                py='0.8em'
+                color='black'
                 width='10rem'
-                borderRadius='1rem'
                 bg='lightGray'
-                transition='filter 0.2s ease'
-                _hover={{ filter: "brightness(0.8)" }}
+                _hover={{ filter: "brightness(0.75)" }}
               >
                 Cancel
-              </Button>
+              </CustomButton>
               <Link href='/' passHref>
-                <Button
+                <CustomButton
                   as='a'
                   colorScheme='red'
                   ml={3}
-                  fontSize='1.6rem'
-                  py='1.2em'
+                  py='0.8em'
                   width='10rem'
-                  borderRadius='1rem'
                 >
                   Delete
-                </Button>
+                </CustomButton>
               </Link>
             </AlertDialogFooter>
           </AlertDialogContent>

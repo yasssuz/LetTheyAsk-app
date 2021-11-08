@@ -34,9 +34,9 @@ export function AuthProvider({ children }) {
         throw new Error("missing google information");
 
       const formattedUser = {
-        name: user.name,
-        avatar: user.avatar,
-        id: user.id,
+        name: user.displayName,
+        avatar: user.photoURL,
+        id: user.uid,
       };
 
       setUser(formattedUser);

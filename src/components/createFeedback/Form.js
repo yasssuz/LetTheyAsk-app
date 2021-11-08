@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { ref, push, set } from "firebase/database";
+import { database } from "../../services/firebase.config";
+
 import { Box, Heading, List, ListItem, Text } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
 import { Image } from "@chakra-ui/image";
@@ -15,20 +18,34 @@ import {
 } from "@chakra-ui/menu";
 
 import ButtonsArea from "./ButtonsArea";
+import useAuth from "../../hooks/useAuth";
 
 export default function Form() {
+  const { user } = useAuth();
   const [category, setCategory] = useState("Feature");
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
-  const onSubmit = data => {
+
+  function onSubmit(data) {
     const feedbackData = {
       ...data,
       category,
+      upVotes: 0,
+      comments: [],
+      user: {
+        avatar: user.avatar,
+        name: user.name,
+      },
     };
-  };
+    const feedbacksRef = ref(database, "feedbacks");
+    const newFeedback = push(feedbacksRef);
+
+    if (!user) throw new Error("LogIn first");
+    set(newFeedback, feedbackData);
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -1,5 +1,6 @@
 import { createBreakpoints } from "@chakra-ui/theme-tools";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { AuthProvider } from "../contexts/AuthContext";
 
 const theme = extendTheme({
   textStyles: {
@@ -44,7 +45,9 @@ const theme = extendTheme({
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </ChakraProvider>
   );
 }

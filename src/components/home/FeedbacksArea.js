@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import { Image } from "@chakra-ui/image";
-import { Text, Link as ChakraLink, Heading, Flex } from "@chakra-ui/layout";
+import { Text, Heading, Flex } from "@chakra-ui/layout";
+import { CustomButton } from "../shared/Buttons";
 
 export default function FeedbacksArea({}) {
   return (
@@ -43,22 +44,13 @@ export default function FeedbacksArea({}) {
         about new ideas to improve our app.
       </Text>
       <Link href='/create-feedback' passHref>
-        <ChakraLink
-          color='white'
+        <CustomButton
           bg='purple'
-          py={["0.81em", "0.9em"]}
-          fontSize={["1.3rem", "1.4rem"]}
-          lineHeight='1.9rem'
-          fontWeight='bold'
-          borderRadius='1rem'
           w={["13.4rem", "15.8rem"]}
-          textAlign='center'
-          transition='filter 0.2s ease'
-          _hover={{ textDecoration: "none", filter: "brightness(1.15)" }}
           mt={["2.4rem", "4.8rem"]}
         >
           + Add Feedback
-        </ChakraLink>
+        </CustomButton>
       </Link>
     </Flex>
   );

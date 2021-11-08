@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-import { Flex, Button, Link as ChakraLink, Heading } from "@chakra-ui/layout";
+import { Flex, Button, Heading } from "@chakra-ui/layout";
 import {
   Menu,
   MenuButton,
@@ -10,6 +10,7 @@ import {
   MenuList,
 } from "@chakra-ui/menu";
 import { Image } from "@chakra-ui/image";
+import { CustomButton } from "../shared/Buttons";
 
 export default function Header() {
   const [sort, setSort] = useState("Most Upvotes");
@@ -82,21 +83,14 @@ export default function Header() {
         </MenuList>
       </Menu>
       <Link href='/create-feedback' passHref>
-        <ChakraLink
+        <CustomButton
+          as='a'
           bg='purple'
-          py={["0.81em", "0.9em"]}
-          fontSize={["1.3rem", "1.4rem"]}
-          lineHeight='1.9rem'
-          fontWeight='bold'
-          borderRadius='1rem'
           w={["13.4rem", "15.8rem"]}
-          textAlign='center'
           ml={[null, "auto"]}
-          transition='filter 0.2s ease'
-          _hover={{ textDecoration: "none", filter: "brightness(1.15)" }}
         >
           + Add Feedback
-        </ChakraLink>
+        </CustomButton>
       </Link>
     </Flex>
   );

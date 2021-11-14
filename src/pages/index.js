@@ -1,10 +1,35 @@
-import { Box, Grid } from "@chakra-ui/layout";
+import { useEffect, useState } from "react";
 
-import FeedbacksArea from "../components/home/FeedbacksArea";
+import { database } from "../services/firebase.config";
+import { ref, get, child } from "@firebase/database";
+
+import { Box, Grid, List } from "@chakra-ui/layout";
+
 import Header from "../components/home/Header";
 import SideArea from "../components/home/SideArea";
+import Feedback from "../components/home/Feedback";
+import NotFoundBox from "../components/home/NotFoundBox";
 
 export default function Home() {
+  const [feedbacks, setFeedbacks] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetch() {
+      const array = [];
+      const dbRef = ref(database);
+      const res = await get(child(dbRef, "feedbacks"));
+
+      res.forEach(snapshot => {
+        array.push({ key: snapshot.key, ...snapshot.val() });
+      });
+      setFeedbacks(array);
+      setLoading(false);
+    }
+
+    fetch();
+  }, []);
+
   return (
     <div style={{ minHeight: "100vh" }}>
       <Grid
@@ -19,7 +44,25 @@ export default function Home() {
         <SideArea />
         <Box>
           <Header />
-          <FeedbacksArea />
+          {loading ? (
+            <h1>loading...</h1>
+          ) : (
+            <>
+              {feedbacks && feedbacks.length > 0 ? (
+                <List
+                  display='grid'
+                  gridGap='1.6rem'
+                  m={["3.2rem 2.4rem", "2.4rem 0"]}
+                >
+                  {feedbacks.map(feedback => (
+                    <Feedback key={feedback.key} data={feedback} />
+                  ))}
+                </List>
+              ) : (
+                <NotFoundBox />
+              )}
+            </>
+          )}
         </Box>
       </Grid>
     </div>

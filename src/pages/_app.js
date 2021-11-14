@@ -18,7 +18,7 @@ const theme = extendTheme({
         overflowX: "hidden",
         position: "relative",
       },
-      "h1, h2, h3, h4, h5, h6, p, input, select, textarea, button, a": {
+      "h1, h2, h3, h4, h5, h6, input, select, textarea, button, body": {
         fontFamily: "Jost !important",
       },
     },

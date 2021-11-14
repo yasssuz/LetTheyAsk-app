@@ -54,7 +54,7 @@ export default function Header() {
           border='none'
           w={["19rem", "25.5rem"]}
           sx={{
-            "hr:last-of-type": {
+            "div:last-of-type hr": {
               display: "none",
             },
           }}
@@ -65,7 +65,7 @@ export default function Header() {
             "Most Comments",
             "Least Comments",
           ].map(text => (
-            <>
+            <div key={text}>
               <MenuItem
                 _hover={{ color: "purple" }}
                 fontSize={["1.6rem", "1.7rem"]}
@@ -78,7 +78,7 @@ export default function Header() {
                 {text}
               </MenuItem>
               <MenuDivider opacity='0.15' />
-            </>
+            </div>
           ))}
         </MenuList>
       </Menu>

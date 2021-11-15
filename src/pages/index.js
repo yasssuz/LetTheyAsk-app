@@ -55,7 +55,11 @@ export default function Home() {
                   m={["3.2rem 2.4rem", "2.4rem 0"]}
                 >
                   {feedbacks.map(feedback => (
-                    <Feedback key={feedback.key} data={feedback} />
+                    <Feedback
+                      key={feedback.key}
+                      data={feedback}
+                      shortDetail={true}
+                    />
                   ))}
                 </List>
               ) : (

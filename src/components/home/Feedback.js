@@ -10,7 +10,15 @@ import {
   ListItem,
 } from "@chakra-ui/layout";
 
-export default function Feedback({ data, element }) {
+export default function Feedback({ data, element, shortDetail }) {
+  function getShortDetail(detail) {
+    if (detail.length > 75) {
+      return detail.substring(0, 75) + "...";
+    }
+
+    return detail;
+  }
+
   return (
     <ListItem
       as={element && element}
@@ -45,7 +53,7 @@ export default function Feedback({ data, element }) {
               color='semiGray'
               m={["0.9rem 0", "0.4rem 0 1.2rem"]}
             >
-              {data.detail}
+              {shortDetail ? getShortDetail(data.detail) : data.detail}
             </Text>
             <Box
               color='blue'

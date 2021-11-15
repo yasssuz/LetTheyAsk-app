@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useRouter } from "next/dist/client/router";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { ref, push, set } from "firebase/database";
 import { database } from "../../services/firebase.config";
 
-import { Box, Heading, List, ListItem, Text } from "@chakra-ui/layout";
+import { Box, Flex, Heading, List, ListItem, Text } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
 import { Image } from "@chakra-ui/image";
 import { Button } from "@chakra-ui/button";
@@ -19,17 +20,33 @@ import {
 
 import ButtonsArea from "./ButtonsArea";
 import useAuth from "../../hooks/useAuth";
+import { useToast } from "@chakra-ui/toast";
+import Toast from "../shared/Toast";
 
 export default function Form() {
   const { user } = useAuth();
+  const toast = useToast();
+  const toastRef = useRef();
   const [category, setCategory] = useState("Feature");
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
+  const router = useRouter();
 
-  function onSubmit(data) {
+  async function onSubmit(data) {
+    if (!user) {
+      toastRef.current = toast({
+        position: "top",
+        duration: 3000,
+        render: () => (
+          <Toast text='Log in before creating a feedback!' status='error' />
+        ),
+      });
+      return;
+    }
+
     const feedbackData = {
       ...data,
       category,
@@ -41,14 +58,31 @@ export default function Form() {
       },
     };
     const feedbacksRef = ref(database, "feedbacks");
-    const newFeedback = push(feedbacksRef);
+    const newFeedback = await push(feedbacksRef);
 
-    if (!user) throw new Error("LogIn first");
-    set(newFeedback, feedbackData);
+    try {
+      await set(newFeedback, feedbackData);
+      toastRef.current = toast({
+        position: "top",
+        duration: 3000,
+        render: () => <Toast text='We saved your feedback!' status='success' />,
+      });
+      setTimeout(() => router.push("/"), 3500);
+    } catch (error) {
+      toastRef.current = toast({
+        position: "top",
+        duration: 3000,
+        render: () => <Toast text='Unknown Error' status='error' />,
+      });
+      console.error(error);
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      style={{ fontSize: "100% !important" }}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <List>
         <ListItem mt='2.4rem'>
           <Heading

@@ -9,6 +9,7 @@ import Header from "../components/home/Header";
 import SideArea from "../components/home/SideArea";
 import Feedback from "../components/home/Feedback";
 import NotFoundBox from "../components/home/NotFoundBox";
+import FeedbackSkeleton from "../components/skeletons/FeedbackSkeleton";
 
 export default function Home() {
   const [feedbacks, setFeedbacks] = useState(null);
@@ -45,7 +46,13 @@ export default function Home() {
         <Box>
           <Header />
           {loading ? (
-            <h1>loading...</h1>
+            <>
+              <FeedbackSkeleton />
+              <FeedbackSkeleton />
+              <FeedbackSkeleton />
+              <FeedbackSkeleton />
+              <FeedbackSkeleton />
+            </>
           ) : (
             <>
               {feedbacks && feedbacks.length > 0 ? (

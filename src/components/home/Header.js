@@ -12,7 +12,7 @@ import {
 import { Image } from "@chakra-ui/image";
 import { CustomButton } from "../shared/Buttons";
 
-export default function Header() {
+export default function Header({ suggestions }) {
   const [sort, setSort] = useState("Most Upvotes");
 
   return (
@@ -30,7 +30,7 @@ export default function Header() {
       <Flex alignItems='center' display={["none", "flex"]}>
         <Image src='/assets/light.svg' alt='light' mr='1.6rem' />
         <Heading fontSize='1.8rem' lineHeight='2.6rem' mr='3.6rem'>
-          6 Suggestions
+          {suggestions} Suggestions
         </Heading>
       </Flex>
       <Menu>

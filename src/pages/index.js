@@ -14,16 +14,21 @@ import FeedbackSkeleton from "../components/skeletons/FeedbackSkeleton";
 export default function Home() {
   const [feedbacks, setFeedbacks] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [suggestionsAmount, setSuggestionsAmount] = useState(0);
 
   useEffect(() => {
     async function fetch() {
       const array = [];
       const dbRef = ref(database);
       const res = await get(child(dbRef, "feedbacks"));
+      let amountOfSnaps = 0;
 
       res.forEach(snapshot => {
+        amountOfSnaps++;
         array.push({ key: snapshot.key, ...snapshot.val() });
       });
+
+      setSuggestionsAmount(amountOfSnaps);
       setFeedbacks(array);
       setLoading(false);
     }
@@ -44,7 +49,7 @@ export default function Home() {
       >
         <SideArea />
         <Box>
-          <Header />
+          <Header suggestions={suggestionsAmount} />
           {loading ? (
             <>
               <FeedbackSkeleton />

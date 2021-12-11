@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/layout";
 
-import Card from "../components/createFeedback/Card";
-import GoBack from "../components/shared/GoBack";
+import Card from "../../components/createFeedback/Card";
+import GoBack from "../../components/shared/GoBack";
 
 export default function createFeedback() {
   return (

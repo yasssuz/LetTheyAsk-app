@@ -43,7 +43,7 @@ export default function NotFoundBox() {
         Got a suggestion? Found a bug that needs to be squashed? We love hearing
         about new ideas to improve our app.
       </Text>
-      <Link href='/create-feedback' passHref>
+      <Link href='/feedback/create-feedback' passHref>
         <CustomButton
           bg='purple'
           w={["13.4rem", "15.8rem"]}

@@ -82,7 +82,7 @@ export default function Header({ suggestions }) {
           ))}
         </MenuList>
       </Menu>
-      <Link href='/create-feedback' passHref>
+      <Link href='/feedback/create-feedback' passHref>
         <CustomButton
           as='a'
           bg='purple'

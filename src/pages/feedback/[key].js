@@ -10,6 +10,7 @@ import { Button } from "@chakra-ui/button";
 import Image from "next/image";
 import FeedbackSkeleton from "../../components/skeletons/FeedbackSkeleton";
 import Comment from "../../components/feedback/Comment";
+import AddComment from "../../components/feedback/AddComment";
 
 export default function FeedbackPage() {
   const [feedback, setFeedback] = useState(null);
@@ -64,6 +65,7 @@ export default function FeedbackPage() {
           ))}
         </List>
       </Box>
+      <AddComment feedbackKey={key} />
     </Box>
   );
 }

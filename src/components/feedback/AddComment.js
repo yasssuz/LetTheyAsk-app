@@ -55,8 +55,18 @@ export default function AddComment({ feedbackKey }) {
           }}
         />
         <Flex mt='1.7rem' alignItems='center' justifyContent='space-between'>
-          <Text>{250 - commentCharacters.length} Characters left</Text>
-          <CustomButton bg='purple' width='11.9rem' type='submit'>
+          <Text
+            fontSize={["1.3rem", "1.5rem"]}
+            lineHeight='1.9rem'
+            color='semiGray'
+          >
+            {250 - commentCharacters.length} Characters left
+          </Text>
+          <CustomButton
+            bg='purple'
+            width={["11.9rem", "14.2rem"]}
+            type='submit'
+          >
             Post Comment
           </CustomButton>
         </Flex>

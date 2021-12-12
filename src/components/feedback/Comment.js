@@ -26,7 +26,7 @@ export default function Comment({ data }) {
           fontSize='1.4rem'
           lineHeight='2rem'
           color='darkBlue'
-          ml='1.6rem'
+          ml={["1.6rem", "3.2rem"]}
         >
           {data.name}
         </Heading>
@@ -41,7 +41,13 @@ export default function Comment({ data }) {
           Reply
         </Button>
       </Flex>
-      <Text fontSize='1.4rem' color='semiGray' lineHeight='2rem' mt='1.6rem'>
+      <Text
+        fontSize={["1.4rem", "1.5rem"]}
+        color='semiGray'
+        lineHeight='2rem'
+        mt='1rem'
+        ml={[null, "7.2rem"]}
+      >
         {data.comment}
       </Text>
     </ListItem>

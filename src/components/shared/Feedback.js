@@ -20,7 +20,7 @@ export default function Feedback({ data, shortDetail, as, heading }) {
   }
 
   return (
-    <Grid
+    <WhiteBox
       bg='white'
       borderRadius='1rem'
       as={as}
@@ -113,6 +113,6 @@ export default function Feedback({ data, shortDetail, as, heading }) {
           {data.comments || 0}
         </Text>
       </GridItem>
-    </Grid>
+    </WhiteBox>
   );
 }

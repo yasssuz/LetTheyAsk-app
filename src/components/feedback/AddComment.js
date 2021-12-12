@@ -18,8 +18,6 @@ export default function AddComment({ feedbackKey }) {
     console.log(data);
   }
 
-  console.log(errors.comment);
-
   return (
     <Box
       as='section'

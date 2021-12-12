@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 import { database } from "../services/firebase.config";
 import { ref, get, child } from "@firebase/database";
 
-import { Box, Grid, List } from "@chakra-ui/layout";
+import { Box, Grid, List, ListItem } from "@chakra-ui/layout";
 
 import Header from "../components/home/Header";
 import SideArea from "../components/home/SideArea";
-import Feedback from "../components/home/Feedback";
+import Feedback from "../components/shared/Feedback";
 import NotFoundBox from "../components/home/NotFoundBox";
 import FeedbackSkeleton from "../components/skeletons/FeedbackSkeleton";
 
@@ -67,11 +68,26 @@ export default function Home() {
                   m={["3.2rem 2.4rem", "2.4rem 0"]}
                 >
                   {feedbacks.map(feedback => (
-                    <Feedback
+                    <ListItem
                       key={feedback.key}
-                      data={feedback}
-                      shortDetail={true}
-                    />
+                      transition='transform 0.2s ease, color 0.2s ease'
+                      _hover={{ transform: "scale(1.03)" }}
+                      sx={{
+                        "&:hover h3": {
+                          color: "blue",
+                        },
+                      }}
+                    >
+                      <Link href={`/feedback/${feedback.key}`} passHref>
+                        <a>
+                          <Feedback
+                            heading='h3'
+                            data={feedback}
+                            shortDetail={true}
+                          />
+                        </a>
+                      </Link>
+                    </ListItem>
                   ))}
                 </List>
               ) : (

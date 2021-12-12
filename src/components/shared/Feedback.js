@@ -1,14 +1,5 @@
-import Link from "next/link";
-
 import { Image } from "@chakra-ui/image";
-import {
-  Box,
-  Grid,
-  Heading,
-  Text,
-  GridItem,
-  ListItem,
-} from "@chakra-ui/layout";
+import { Box, Heading, Text, GridItem, Grid } from "@chakra-ui/layout";
 
 export default function Feedback({ data, shortDetail, as, heading }) {
   function getShortDetail(detail) {
@@ -20,10 +11,11 @@ export default function Feedback({ data, shortDetail, as, heading }) {
   }
 
   return (
-    <WhiteBox
+    <Grid
       bg='white'
       borderRadius='1rem'
       as={as}
+      display='grid'
       p={["2.4rem", "2.8rem 3.2rem"]}
       templateColumns={["1fr 1fr", "auto 1fr auto"]}
     >
@@ -113,6 +105,6 @@ export default function Feedback({ data, shortDetail, as, heading }) {
           {data.comments || 0}
         </Text>
       </GridItem>
-    </WhiteBox>
+    </Grid>
   );
 }

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Comment({ data }) {
   return (
-    <ListItem mt='2.4rem'>
+    <ListItem mt={["2.4rem", "2.8rem"]}>
       <Flex alignItems='center'>
         <Box
           overflow='hidden'

@@ -10,7 +10,7 @@ import {
   ListItem,
 } from "@chakra-ui/layout";
 
-export default function Feedback({ data, element, shortDetail }) {
+export default function Feedback({ data, shortDetail }) {
   function getShortDetail(detail) {
     if (detail.length > 75) {
       return detail.substring(0, 75) + "...";
@@ -21,7 +21,6 @@ export default function Feedback({ data, element, shortDetail }) {
 
   return (
     <ListItem
-      as={element && element}
       bg='white'
       borderRadius='1rem'
       transition='transform 0.2s ease'

@@ -67,7 +67,7 @@ export default function Form() {
         duration: 3000,
         render: () => <Toast text='We saved your feedback!' status='success' />,
       });
-      setTimeout(() => router.push("/"), 3500);
+      setTimeout(() => router.push("/"), 1000);
     } catch (error) {
       toastRef.current = toast({
         position: "top",

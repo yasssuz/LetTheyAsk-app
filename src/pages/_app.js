@@ -21,6 +21,12 @@ const theme = extendTheme({
       "h1, h2, h3, h4, h5, h6, input, select, textarea, button, body": {
         fontFamily: "Jost !important",
       },
+      "input, textarea": {
+        transition: "outline 0.2s ease-in-out !important",
+      },
+      "input:focus, input:hover, textarea:focus, textarea:hover": {
+        outline: "1px solid #4661E6",
+      },
     },
   },
   breakpoints: createBreakpoints({

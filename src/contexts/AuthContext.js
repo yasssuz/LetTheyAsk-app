@@ -4,6 +4,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signOut,
 } from "@firebase/auth";
 import { auth } from "../services/firebase.config";
 
@@ -11,6 +12,11 @@ export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+
+  async function handleSignOut() {
+    signOut(auth);
+    setUser(null);
+  }
 
   async function handleSignIn() {
     const provider = new GoogleAuthProvider();
@@ -30,8 +36,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
-      if (!user.displayName || !user.photoURL)
-        throw new Error("missing google information");
+      if (!user?.displayName || !user?.photoURL) return;
 
       const formattedUser = {
         name: user.displayName,
@@ -52,6 +57,7 @@ export function AuthProvider({ children }) {
       value={{
         user,
         handleSignIn,
+        handleSignOut,
       }}
     >
       {children}

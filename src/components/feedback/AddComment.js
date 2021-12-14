@@ -3,9 +3,13 @@ import { Box, Heading, Flex, Text } from "@chakra-ui/layout";
 import { Textarea } from "@chakra-ui/textarea";
 import { useForm } from "react-hook-form";
 import { CustomButton } from "../shared/Buttons";
+import { push, ref, set } from "firebase/database";
+import { database } from "../../services/firebase.config";
+import useAuth from "../../hooks/useAuth";
 
 export default function AddComment({ feedbackKey }) {
   const [commentCharacters, setCommentCharacters] = useState("");
+  const { user, handleSignIn } = useAuth();
   const {
     register,
     handleSubmit,
@@ -14,8 +18,19 @@ export default function AddComment({ feedbackKey }) {
     mode: "onChange",
   });
 
-  function onSubmit(data) {
-    console.log(data);
+  async function onSubmit(data) {
+    const feedbackRef = ref(database, `/feedbacks/${feedbackKey}/comments`);
+    const addComment = await push(feedbackRef);
+    const comment = {
+      comment: data.comment,
+      user,
+    };
+
+    try {
+      await set(addComment, comment);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -60,13 +75,24 @@ export default function AddComment({ feedbackKey }) {
           >
             {250 - commentCharacters.length} Characters left
           </Text>
-          <CustomButton
-            bg='purple'
-            width={["11.9rem", "14.2rem"]}
-            type='submit'
-          >
-            Post Comment
-          </CustomButton>
+          {user ? (
+            <CustomButton
+              bg='purple'
+              width={["11.9rem", "14.2rem"]}
+              type='submit'
+            >
+              Post Comment
+            </CustomButton>
+          ) : (
+            <CustomButton
+              type='button'
+              onClick={handleSignIn}
+              bg='red'
+              w={["100%", "10rem"]}
+            >
+              Log In
+            </CustomButton>
+          )}
         </Flex>
       </form>
     </Box>

@@ -1,4 +1,4 @@
-import { ref, onValue } from "@firebase/database";
+import { ref, onValue, get, child } from "@firebase/database";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import GoBack from "../../components/shared/GoBack";
@@ -11,33 +11,46 @@ import Image from "next/image";
 import FeedbackSkeleton from "../../components/skeletons/FeedbackSkeleton";
 import Comment from "../../components/feedback/Comment";
 import AddComment from "../../components/feedback/AddComment";
+import useAuth from "../../hooks/useAuth";
 
 export default function FeedbackPage() {
   const [feedback, setFeedback] = useState(null);
-  const comments = [
-    {
-      avatar:
-        "https://lh3.googleusercontent.com/a-/AOh14GhiHC87dOQlrd0SdTvSCfa4Zf9BUYjJ45vkI_sO=s96-c",
-      name: "Elijah Moss",
-      comment:
-        "Also, please allow styles to be applied based on system preferences. I would love to be able to browse Frontend Mentor in the evening after my device’s dark mode turns on without the bright background it currently has.",
-    },
-  ];
+  const [comments, setComments] = useState([]);
+  const { handleSignOut } = useAuth();
+
   const router = useRouter();
   const { key } = router.query;
 
+  function getCommentsAmount(comments) {
+    let commentsAmount = 0;
+    comments.forEach(() => commentsAmount++);
+    return commentsAmount;
+  }
+
   useEffect(() => {
     const starCountRef = ref(database, `feedbacks/${key}`);
+    const dbRef = ref(database);
 
     onValue(starCountRef, snapshot => {
       const data = snapshot.val();
-      setFeedback(data);
+      const dataCopy = { ...data };
+      delete dataCopy.comments;
+      setFeedback(dataCopy);
+
+      get(child(dbRef, `feedbacks/${key}/comments`)).then(res => {
+        const array = [];
+        res.forEach(snapshot => {
+          array.push({ key: snapshot.key, ...snapshot.val() });
+        });
+        setComments(array);
+      });
     });
   }, [key]);
 
   return (
     <Box as='main' p={["2.4rem", "5.6rem 4rem"]} maxW='730px' m='0 auto'>
       <Flex as='section'>
+        <button onClick={handleSignOut}>signout</button>
         <GoBack />
       </Flex>
       <Box as='section' mt='2.4rem'>
@@ -55,11 +68,11 @@ export default function FeedbackPage() {
         borderRadius='1rem'
       >
         <Heading as='h2' color='darkBlue' fontSize='1.8rem' lineHeight='2.6rem'>
-          4 Comments
+          {getCommentsAmount(comments)} Comments
         </Heading>
         <List>
-          {comments.map((comment, index) => (
-            <Fragment key={index}>
+          {comments.map(comment => (
+            <Fragment key={comment.key}>
               <Comment data={comment} />
             </Fragment>
           ))}

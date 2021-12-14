@@ -26,7 +26,9 @@ export default function Home() {
 
       res.forEach(snapshot => {
         amountOfSnaps++;
-        array.push({ key: snapshot.key, ...snapshot.val() });
+        const snapshotCopy = { ...snapshot.val(), key: snapshot.key };
+        delete snapshotCopy.comments;
+        array.push(snapshotCopy);
       });
 
       setSuggestionsAmount(amountOfSnaps);

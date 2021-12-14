@@ -14,8 +14,8 @@ export default function Comment({ data }) {
           borderRadius='50%'
         >
           <Image
-            src={data.avatar}
-            alt={data.name}
+            src={data.user.avatar}
+            alt={data.user.name}
             layout='fill'
             objectFit='cover'
             quality={100}
@@ -28,7 +28,7 @@ export default function Comment({ data }) {
           color='darkBlue'
           ml={["1.6rem", "3.2rem"]}
         >
-          {data.name}
+          {data.user.name}
         </Heading>
         <Button
           fontSize='1.4rem'
@@ -42,7 +42,7 @@ export default function Comment({ data }) {
         </Button>
       </Flex>
       <Text
-        fontSize={["1.4rem", "1.5rem"]}
+        fontSize={["1.5rem", "1.6rem"]}
         color='semiGray'
         lineHeight='2rem'
         mt='1rem'

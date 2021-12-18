@@ -16,7 +16,6 @@ import useAuth from "../../hooks/useAuth";
 export default function FeedbackPage() {
   const [feedback, setFeedback] = useState(null);
   const [comments, setComments] = useState([]);
-  const { handleSignOut } = useAuth();
 
   const router = useRouter();
   const { key } = router.query;
@@ -50,7 +49,6 @@ export default function FeedbackPage() {
   return (
     <Box as='main' p={["2.4rem", "5.6rem 4rem"]} maxW='730px' m='0 auto'>
       <Flex as='section'>
-        <button onClick={handleSignOut}>signout</button>
         <GoBack />
       </Flex>
       <Box as='section' mt='2.4rem'>

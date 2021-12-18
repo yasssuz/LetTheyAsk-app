@@ -47,7 +47,7 @@ export default function FeedbackPage() {
   }, [key]);
 
   return (
-    <Box as='main' p={["2.4rem", "5.6rem 4rem"]} maxW='730px' m='0 auto'>
+    <Box as='main' p={["2.4rem", "5.6rem 4rem"]} maxW='800px' m='0 auto'>
       <Flex as='section'>
         <GoBack />
       </Flex>

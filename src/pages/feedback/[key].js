@@ -5,13 +5,12 @@ import GoBack from "../../components/shared/GoBack";
 import { database } from "../../services/firebase.config";
 import { Box, Flex, Heading, List, ListItem, Text } from "@chakra-ui/layout";
 import Feedback from "../../components/shared/Feedback";
-// import { Image } from "@chakra-ui/image";
-import { Button } from "@chakra-ui/button";
 import Image from "next/image";
 import FeedbackSkeleton from "../../components/skeletons/FeedbackSkeleton";
 import Comment from "../../components/feedback/Comment";
 import AddComment from "../../components/feedback/AddComment";
-import useAuth from "../../hooks/useAuth";
+import { CustomButton } from "../../components/shared/Buttons";
+import NotFoundBox from "../../components/shared/NotFoundBox";
 
 export default function FeedbackPage() {
   const [feedback, setFeedback] = useState(null);
@@ -65,15 +64,30 @@ export default function FeedbackPage() {
         bg='white'
         borderRadius='1rem'
       >
-        <Heading as='h2' color='darkBlue' fontSize='1.8rem' lineHeight='2.6rem'>
-          {getCommentsAmount(comments)} Comments
-        </Heading>
         <List>
-          {comments.map(comment => (
-            <Fragment key={comment.key}>
-              <Comment data={comment} />
-            </Fragment>
-          ))}
+          {comments.length > 0 ? (
+            <>
+              <Heading
+                as='h2'
+                color='darkBlue'
+                fontSize='2rem'
+                lineHeight='2.6rem'
+              >
+                {getCommentsAmount(comments)} Comments
+              </Heading>
+              {comments.map(comment => (
+                <Fragment key={comment.key}>
+                  <Comment data={comment} />
+                </Fragment>
+              ))}
+            </>
+          ) : (
+            <NotFoundBox
+              title='There is no comment yet.'
+              description='Got a question or idea? Be the first one to comment!'
+              minHeight={["28rem", "35rem"]}
+            />
+          )}
         </List>
       </Box>
       <AddComment feedbackKey={key} />

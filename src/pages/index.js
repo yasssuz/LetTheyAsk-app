@@ -15,20 +15,22 @@ export default function Home() {
 
   useEffect(() => {
     async function fetch() {
-      const array = [];
+      const feedbacksArray = [];
       const dbRef = ref(database);
       const res = await get(child(dbRef, "feedbacks"));
       let amountOfSnaps = 0;
 
       res.forEach(snapshot => {
         amountOfSnaps++;
-        const snapshotCopy = { ...snapshot.val(), key: snapshot.key };
-        delete snapshotCopy.comments;
-        array.push(snapshotCopy);
+        const formattedSnap = {
+          ...snapshot.val(),
+          key: snapshot.key,
+        };
+        feedbacksArray.push(formattedSnap);
       });
 
       setSuggestionsAmount(amountOfSnaps);
-      setFeedbacks(array);
+      setFeedbacks(feedbacksArray);
       setLoading(false);
     }
 

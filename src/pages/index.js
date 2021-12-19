@@ -1,42 +1,9 @@
-import { useEffect, useState } from "react";
-
-import { database } from "../services/firebase.config";
-import { ref, get, child } from "@firebase/database";
-
 import { Grid } from "@chakra-ui/layout";
 
 import SideArea from "../components/home/SideArea";
 import MainArea from "../components/home/MainArea";
 
 export default function Home() {
-  const [feedbacks, setFeedbacks] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [suggestionsAmount, setSuggestionsAmount] = useState(0);
-
-  useEffect(() => {
-    async function fetch() {
-      const feedbacksArray = [];
-      const dbRef = ref(database);
-      const res = await get(child(dbRef, "feedbacks"));
-      let amountOfSnaps = 0;
-
-      res.forEach(snapshot => {
-        amountOfSnaps++;
-        const formattedSnap = {
-          ...snapshot.val(),
-          key: snapshot.key,
-        };
-        feedbacksArray.push(formattedSnap);
-      });
-
-      setSuggestionsAmount(amountOfSnaps);
-      setFeedbacks(feedbacksArray);
-      setLoading(false);
-    }
-
-    fetch();
-  }, []);
-
   return (
     <Grid
       as='main'
@@ -49,11 +16,7 @@ export default function Home() {
       minH='100vh'
     >
       <SideArea />
-      <MainArea
-        feedbacks={feedbacks}
-        suggestionsAmount={suggestionsAmount}
-        loading={loading}
-      />
+      <MainArea />
     </Grid>
   );
 }

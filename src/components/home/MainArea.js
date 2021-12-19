@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
+
+import { database } from "../../services/firebase.config";
+import { ref, get, child } from "@firebase/database";
 
 import { Box, List, ListItem } from "@chakra-ui/layout";
 
@@ -7,7 +11,35 @@ import Header from "./Header";
 import Feedback from "../shared/Feedback";
 import NotFoundBox from "../shared/NotFoundBox";
 
-export default function MainArea({ feedbacks, suggestionsAmount, loading }) {
+export default function MainArea() {
+  const [feedbacks, setFeedbacks] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [suggestionsAmount, setSuggestionsAmount] = useState(0);
+
+  useEffect(() => {
+    async function fetch() {
+      const feedbacksArray = [];
+      const dbRef = ref(database);
+      const res = await get(child(dbRef, "feedbacks"));
+      let amountOfSnaps = 0;
+
+      res.forEach(snapshot => {
+        amountOfSnaps++;
+        const formattedSnap = {
+          ...snapshot.val(),
+          key: snapshot.key,
+        };
+        feedbacksArray.push(formattedSnap);
+      });
+
+      setSuggestionsAmount(amountOfSnaps);
+      setFeedbacks(feedbacksArray);
+      setLoading(false);
+    }
+
+    fetch();
+  }, []);
+
   return (
     <Box>
       <Header suggestions={suggestionsAmount} />

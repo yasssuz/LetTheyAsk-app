@@ -9,7 +9,7 @@ import { Box, Grid, List, ListItem } from "@chakra-ui/layout";
 import Header from "../components/home/Header";
 import SideArea from "../components/home/SideArea";
 import Feedback from "../components/shared/Feedback";
-import NotFoundBox from "../components/home/NotFoundBox";
+import NotFoundBox from "../components/shared/NotFoundBox";
 import FeedbackSkeleton from "../components/skeletons/FeedbackSkeleton";
 
 export default function Home() {
@@ -93,7 +93,12 @@ export default function Home() {
                   ))}
                 </List>
               ) : (
-                <NotFoundBox />
+                <NotFoundBox
+                  title='There is no feedback yet.'
+                  description='Got a suggestion? Found a bug that needs to be squashed? We love hearing
+                about new ideas to improve our app.'
+                  btn={true}
+                />
               )}
             </>
           )}

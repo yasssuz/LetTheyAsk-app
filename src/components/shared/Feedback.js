@@ -1,5 +1,6 @@
 import { Image } from "@chakra-ui/image";
 import { Box, Heading, Text, GridItem, Grid } from "@chakra-ui/layout";
+import { getCommentsAmount } from "../../utils/comments";
 
 export default function Feedback({ data, shortDetail, as, heading }) {
   function getShortDetail(detail) {
@@ -8,14 +9,6 @@ export default function Feedback({ data, shortDetail, as, heading }) {
     }
 
     return detail;
-  }
-
-  function getCommentsAmount(comments) {
-    let commentsAmount = 0;
-    const commentsKeys = comments && Object.keys(comments);
-
-    commentsKeys && commentsKeys.forEach(() => commentsAmount++);
-    return commentsAmount;
   }
 
   return (

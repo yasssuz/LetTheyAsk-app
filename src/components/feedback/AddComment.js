@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Box, Heading, Flex, Text } from "@chakra-ui/layout";
 import { Textarea } from "@chakra-ui/textarea";
-import { useForm } from "react-hook-form";
+import { useForm, setValue } from "react-hook-form";
 import { CustomButton } from "../shared/Buttons";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../services/firebase.config";
@@ -53,7 +53,7 @@ export default function AddComment({ feedbackKey }) {
           bg='lightGray'
           placeholder='Type your comment here...'
           mt='2.4rem'
-          fontSize='1.4rem'
+          fontSize='1.6rem'
           p='1.6rem'
           maxLength='250'
           className={errors.comment ? "error" : null}

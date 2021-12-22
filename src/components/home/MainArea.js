@@ -124,32 +124,29 @@ export default function MainArea() {
               gridGap='1.6rem'
               m={["3.2rem 2.4rem", "2.4rem 0"]}
             >
-              {sortedFeedbacks().map(feedback => {
-                return (
-                  <Fragment key={feedback.key}>
-                    <h1 key={feedback.key}>{feedback.category}</h1>
-                    <ListItem
-                      transition='transform 0.2s ease, color 0.2s ease'
-                      _hover={{ transform: "scale(1.03)" }}
-                      sx={{
-                        "&:hover h3": {
-                          color: "blue",
-                        },
-                      }}
-                    >
-                      <Link href={`/feedback/${feedback.key}`} passHref>
-                        <a>
-                          <Feedback
-                            heading='h3'
-                            data={feedback}
-                            shortDetail={true}
-                          />
-                        </a>
-                      </Link>
-                    </ListItem>
-                  </Fragment>
-                );
-              })}
+              {sortedFeedbacks().map(feedback => (
+                <Fragment key={feedback.key}>
+                  <ListItem
+                    transition='transform 0.2s ease, color 0.2s ease'
+                    _hover={{ transform: "scale(1.03)" }}
+                    sx={{
+                      "&:hover h3": {
+                        color: "blue",
+                      },
+                    }}
+                  >
+                    <Link href={`/feedback/${feedback.key}`} passHref>
+                      <a>
+                        <Feedback
+                          heading='h3'
+                          data={feedback}
+                          shortDetail={true}
+                        />
+                      </a>
+                    </Link>
+                  </ListItem>
+                </Fragment>
+              ))}
             </List>
           ) : (
             <NotFoundBox

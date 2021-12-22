@@ -17,11 +17,11 @@ export default function RoadmapSquare() {
         <Link href='/roadmap' passHref>
           <Text
             color='blue'
-            textDecoration='underline'
             fontWeight='600'
             fontSize='1.4rem'
             lineHeight='1.4rem'
             cursor='pointer'
+            _hover={{ textDecoration: "underline" }}
           >
             View
           </Text>

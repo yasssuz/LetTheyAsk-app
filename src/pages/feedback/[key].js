@@ -1,15 +1,16 @@
-import { ref, onValue, get, child } from "@firebase/database";
-import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
-import GoBack from "../../components/shared/GoBack";
+import { useRouter } from "next/router";
+
+import { ref, onValue, get, child } from "@firebase/database";
 import { database } from "../../services/firebase.config";
-import { Box, Flex, Heading, List, ListItem, Text } from "@chakra-ui/layout";
+
+import { Box, Flex, Heading, List } from "@chakra-ui/layout";
+
+import GoBack from "../../components/shared/GoBack";
 import Feedback from "../../components/shared/Feedback";
-import Image from "next/image";
 import FeedbackSkeleton from "../../components/skeletons/FeedbackSkeleton";
 import Comment from "../../components/feedback/Comment";
 import AddComment from "../../components/feedback/AddComment";
-import { CustomButton } from "../../components/shared/Buttons";
 import NotFoundBox from "../../components/shared/NotFoundBox";
 
 export default function FeedbackPage() {

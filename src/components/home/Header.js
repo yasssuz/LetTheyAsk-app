@@ -12,9 +12,7 @@ import {
 import { Image } from "@chakra-ui/image";
 import { CustomButton } from "../shared/Buttons";
 
-export default function Header({ suggestions }) {
-  const [sort, setSort] = useState("Most Upvotes");
-
+export default function Header({ suggestions, sort, setSort }) {
   return (
     <Flex
       as='header'
@@ -38,7 +36,6 @@ export default function Header({ suggestions }) {
           as={Button}
           fontSize='1.4rem'
           lineHeight='2rem'
-          opacity={[null, null, "0.75"]}
           sx={{
             span: {
               display: "flex",

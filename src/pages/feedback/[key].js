@@ -30,10 +30,7 @@ export default function FeedbackPage() {
     const dbRef = ref(database);
 
     onValue(starCountRef, snapshot => {
-      const data = snapshot.val();
-      const dataCopy = { ...data };
-      delete dataCopy.comments;
-      setFeedback(dataCopy);
+      setFeedback(snapshot.val());
 
       get(child(dbRef, `feedbacks/${key}/comments`)).then(res => {
         const array = [];

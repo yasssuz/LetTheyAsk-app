@@ -1,7 +1,6 @@
-import { useState } from "react";
 import Link from "next/link";
 
-import { Flex, Button, Heading } from "@chakra-ui/layout";
+import { Flex, Button, Heading, Box } from "@chakra-ui/layout";
 import {
   Menu,
   MenuButton,
@@ -47,9 +46,12 @@ export default function Header({ suggestions, sort, setSort }) {
           <Image src='/assets/arrow.svg' alt='' ml='0.9rem' />
         </MenuButton>
         <MenuList
+          p='0'
           color='semiGray'
           border='none'
-          w={["19rem", "25.5rem"]}
+          w={["19rem", "27rem"]}
+          borderRadius={["0.7rem", "1rem"]}
+          overflow='hidden'
           sx={{
             "div:last-of-type hr": {
               display: "none",
@@ -62,20 +64,28 @@ export default function Header({ suggestions, sort, setSort }) {
             "Most Comments",
             "Least Comments",
           ].map(text => (
-            <div key={text}>
+            <Box
+              _hover={{
+                button: {
+                  background: "gray",
+                },
+              }}
+              key={text}
+            >
               <MenuItem
-                _hover={{ color: "purple" }}
-                fontSize={["1.6rem", "1.7rem"]}
-                lineHeight='2.3rem'
                 cursor='pointer'
-                px={["1.9rem", "2.4rem"]}
-                py='0.7rem'
+                fontWeight='600'
+                fontSize='1.6rem'
+                lineHeight='2.3rem'
+                color='semiGray'
+                p={["1.4rem 1.6rem", "1.6rem 2.4rem"]}
+                _hover={{ color: "purple" }}
                 onClick={() => setSort(text)}
               >
                 {text}
               </MenuItem>
-              <MenuDivider opacity='0.15' />
-            </div>
+              <MenuDivider m='0' opacity='0.1' />
+            </Box>
           ))}
         </MenuList>
       </Menu>

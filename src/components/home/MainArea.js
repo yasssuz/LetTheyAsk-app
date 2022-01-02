@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { database } from "../../services/firebase.config";
-import { ref, get, child } from "@firebase/database";
+import { ref, get, child, onValue } from "@firebase/database";
 import { getCommentsAmount } from "../../utils/comments";
 
 import { Box, List, ListItem } from "@chakra-ui/layout";
@@ -68,7 +68,6 @@ export default function MainArea() {
         if (getCommentsAmount(a.comments) > getCommentsAmount(b.comments)) {
           return 1;
         }
-        console.log();
 
         if (getCommentsAmount(a.comments) < getCommentsAmount(b.comments)) {
           return -1;
@@ -82,27 +81,27 @@ export default function MainArea() {
   }
 
   useEffect(() => {
-    async function fetchData() {
-      const feedbacksArray = [];
-      const dbRef = ref(database);
-      const res = await get(child(dbRef, "feedbacks"));
-      let amountOfSnaps = 0;
+    const feedbacksRef = ref(database, `feedbacks`);
+    const dbRef = ref(database);
 
-      res.forEach(snapshot => {
-        amountOfSnaps++;
-        const formattedSnap = {
-          ...snapshot.val(),
-          key: snapshot.key,
-        };
-        feedbacksArray.push(formattedSnap);
+    onValue(feedbacksRef, snapshot => {
+      setFeedbacks(snapshot.val());
+
+      get(child(dbRef, `feedbacks`)).then(res => {
+        let amountOfSnaps = 0;
+        const feedbacksArray = [];
+
+        res.forEach(snapshot => {
+          amountOfSnaps++;
+          feedbacksArray.push({ key: snapshot.key, ...snapshot.val() });
+        });
+
+        setSuggestionsAmount(amountOfSnaps);
+        setFeedbacks(feedbacksArray);
       });
 
-      setSuggestionsAmount(amountOfSnaps);
-      setFeedbacks(feedbacksArray);
       setLoading(false);
-    }
-
-    fetchData();
+    });
   }, []);
 
   return (

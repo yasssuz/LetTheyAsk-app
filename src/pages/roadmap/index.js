@@ -1,13 +1,32 @@
-import { Box, Heading } from "@chakra-ui/layout";
-import Header from "../../components/roadmap/Header";
+import { useEffect, useState } from "react";
 
-export default function createFeedback() {
+import { database } from "../../services/firebase.config";
+import { ref, onValue } from "@firebase/database";
+
+import { Box } from "@chakra-ui/layout";
+
+import Header from "../../components/roadmap/Header";
+import RoadmapBoard from "../../components/roadmap/RoadmapBoard";
+
+export default function Roadmap() {
+  const [roadmap, setRoadmap] = useState(null);
+
+  useEffect(() => {
+    const feedbacksRef = ref(database, `roadmap`);
+
+    onValue(feedbacksRef, snapshot => {
+      setRoadmap(snapshot.val());
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(roadmap);
+  }, [roadmap]);
+
   return (
     <Box as='main' minH='100vh' mt={[null, "5.6rem"]}>
       <Header />
-      <Box maxW='1240px' m='0 auto' p={["0 2.4rem", "0 4rem"]}>
-        <Heading mt='20rem'>still under construction, fam!</Heading>
-      </Box>
+      <RoadmapBoard feedbacks={[]} />
     </Box>
   );
 }

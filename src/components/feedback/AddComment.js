@@ -1,11 +1,16 @@
+import { useForm } from "react-hook-form";
 import { useRef, useState } from "react";
-import { Box, Heading, Flex, Text } from "@chakra-ui/layout";
-import { Textarea } from "@chakra-ui/textarea";
-import { useForm, setValue } from "react-hook-form";
-import { CustomButton } from "../shared/Buttons";
+
 import { push, ref, set } from "firebase/database";
 import { database } from "../../services/firebase.config";
 import useAuth from "../../hooks/useAuth";
+
+import { useToast } from "@chakra-ui/toast";
+import { Box, Heading, Flex, Text } from "@chakra-ui/layout";
+import { Textarea } from "@chakra-ui/textarea";
+
+import { CustomButton } from "../shared/Buttons";
+import Toast from "../shared/Toast";
 
 export default function AddComment({ feedbackKey }) {
   const [commentCharacters, setCommentCharacters] = useState("");
@@ -17,6 +22,8 @@ export default function AddComment({ feedbackKey }) {
   } = useForm({
     mode: "onChange",
   });
+  const toast = useToast();
+  const toastRef = useRef();
 
   async function onSubmit(data) {
     const feedbackRef = ref(database, `/feedbacks/${feedbackKey}/comments`);
@@ -28,7 +35,19 @@ export default function AddComment({ feedbackKey }) {
 
     try {
       await set(addComment, comment);
+      toastRef.current = toast({
+        position: "top",
+        duration: 3000,
+        render: () => (
+          <Toast text='Comment added successfully' status='success' />
+        ),
+      });
     } catch (error) {
+      toastRef.current = toast({
+        position: "top",
+        duration: 3000,
+        render: () => <Toast text='Error' status='error' />,
+      });
       console.log(error);
     }
   }

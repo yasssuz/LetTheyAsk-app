@@ -12,6 +12,7 @@ import FeedbackSkeleton from "../../components/skeletons/FeedbackSkeleton";
 import Comment from "../../components/feedback/Comment";
 import AddComment from "../../components/feedback/AddComment";
 import NotFoundBox from "../../components/shared/NotFoundBox";
+import BaseLayout from "../../components/shared/BaseLayout";
 
 export default function FeedbackPage() {
   const [feedback, setFeedback] = useState(null);
@@ -44,51 +45,53 @@ export default function FeedbackPage() {
   }, [key]);
 
   return (
-    <Box as='main' p={["2.4rem", "5.6rem 4rem"]} maxW='800px' m='0 auto'>
-      <Flex as='section'>
-        <GoBack />
-      </Flex>
-      <Box as='section' mt='2.4rem'>
-        {feedback ? (
-          <Feedback data={feedback} heading='h1' />
-        ) : (
-          <FeedbackSkeleton />
-        )}
-      </Box>
-      <Box
-        as='section'
-        mt='2.4rem'
-        p={["2.4rem", "2.4rem 3.4rem"]}
-        bg='white'
-        borderRadius='1rem'
-      >
-        <List>
-          {comments.length > 0 ? (
-            <>
-              <Heading
-                as='h2'
-                color='darkBlue'
-                fontSize='2rem'
-                lineHeight='2.6rem'
-              >
-                {getCommentsAmount(comments)} Comments
-              </Heading>
-              {comments.map(comment => (
-                <Fragment key={comment.key}>
-                  <Comment data={comment} />
-                </Fragment>
-              ))}
-            </>
+    <BaseLayout>
+      <Box as='main' p={["2.4rem", "5.6rem 4rem"]} maxW='800px' m='0 auto'>
+        <Flex as='section'>
+          <GoBack />
+        </Flex>
+        <Box as='section' mt='2.4rem'>
+          {feedback ? (
+            <Feedback data={feedback} heading='h1' />
           ) : (
-            <NotFoundBox
-              title='There is no comment yet.'
-              description='Got a question or idea? Be the first one to comment!'
-              minHeight={["28rem", "35rem"]}
-            />
+            <FeedbackSkeleton />
           )}
-        </List>
+        </Box>
+        <Box
+          as='section'
+          mt='2.4rem'
+          p={["2.4rem", "2.4rem 3.4rem"]}
+          bg='white'
+          borderRadius='1rem'
+        >
+          <List>
+            {comments.length > 0 ? (
+              <>
+                <Heading
+                  as='h2'
+                  color='darkBlue'
+                  fontSize='2rem'
+                  lineHeight='2.6rem'
+                >
+                  {getCommentsAmount(comments)} Comments
+                </Heading>
+                {comments.map(comment => (
+                  <Fragment key={comment.key}>
+                    <Comment data={comment} />
+                  </Fragment>
+                ))}
+              </>
+            ) : (
+              <NotFoundBox
+                title='There is no comment yet.'
+                description='Got a question or idea? Be the first one to comment!'
+                minHeight={["28rem", "35rem"]}
+              />
+            )}
+          </List>
+        </Box>
+        <AddComment feedbackKey={key} />
       </Box>
-      <AddComment feedbackKey={key} />
-    </Box>
+    </BaseLayout>
   );
 }

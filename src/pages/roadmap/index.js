@@ -7,6 +7,7 @@ import { Box } from "@chakra-ui/layout";
 
 import Header from "../../components/roadmap/Header";
 import RoadmapBoard from "../../components/roadmap/RoadmapBoard";
+import BaseLayout from "../../components/shared/BaseLayout";
 
 export default function Roadmap() {
   const [roadmap, setRoadmap] = useState(null);
@@ -24,9 +25,11 @@ export default function Roadmap() {
   }, [roadmap]);
 
   return (
-    <Box as='main' minH='100vh' mt={[null, "5.6rem"]}>
-      <Header />
-      <RoadmapBoard feedbacks={[]} />
-    </Box>
+    <BaseLayout>
+      <Box as='main' minH='100vh' mt={[null, "5.6rem"]}>
+        <Header />
+        <RoadmapBoard feedbacks={[]} />
+      </Box>
+    </BaseLayout>
   );
 }

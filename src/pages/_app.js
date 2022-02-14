@@ -1,6 +1,7 @@
 import { createBreakpoints } from "@chakra-ui/theme-tools";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { AuthProvider } from "../contexts/AuthContext";
+import { AnimatePresence, domAnimation, LazyMotion } from "framer-motion";
 
 const theme = extendTheme({
   textStyles: {
@@ -50,11 +51,15 @@ const theme = extendTheme({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider theme={theme}>
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
-    </ChakraProvider>
+    <AuthProvider>
+      <ChakraProvider theme={theme}>
+        <LazyMotion features={domAnimation}>
+          <AnimatePresence exitBeforeEnter>
+            <Component {...pageProps} />
+          </AnimatePresence>
+        </LazyMotion>
+      </ChakraProvider>
+    </AuthProvider>
   );
 }
 
